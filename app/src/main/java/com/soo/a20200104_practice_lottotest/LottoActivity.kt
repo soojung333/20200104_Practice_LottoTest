@@ -237,6 +237,10 @@ class LottoActivity : BaseActivity() {
             }
             if (isDuplOk) {
                 bonusNumber = tempNum
+
+//                만든 보너스번호를 화면에 반영.
+                bonusNumTxt.text = bonusNumber.toString()
+
                 break
             }
         }
