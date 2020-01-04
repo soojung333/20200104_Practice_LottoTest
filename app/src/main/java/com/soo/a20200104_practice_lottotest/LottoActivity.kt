@@ -20,6 +20,7 @@ class LottoActivity : BaseActivity() {
     val winLottoNumArr = ArrayList<Int>()
     val winLottoNumTextViewList = ArrayList<TextView>()
     val myLottoNumTextViewList = ArrayList<TextView>()
+    var bonusNumber = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +110,9 @@ class LottoActivity : BaseActivity() {
 //        완료되면 6개 텍스트뷰에 반영.
 
         winLottoNumArr.clear()
+        bonusNumber = 0
+
+//        당첨번호 6개를 만들기 위한 for문
 
         for (i in 0..5) {
             while (true) {
@@ -136,6 +140,30 @@ class LottoActivity : BaseActivity() {
 
 //        Collections 클래스의 기능을 이용해서 Arraylist 내부 값을 정렬 기능 이용.
         Collections.sort(winLottoNumArr)
+
+
+//        보너스 번호 생성
+//        1~45 / 당첨번호와 중복x => 1개 필요
+//        써도 되는 번호가 나올 때 까지 무한 반복
+        while (true) {
+
+            val tempNum = Random.nextInt(45) +1
+
+            var isDuplOk = true
+
+            for (winNum in winLottoNumArr) {
+                if (tempNum == winNum) {
+                    isDuplOk = false
+                }
+            }
+            if (isDuplOk) {
+                bonusNumber = tempNum
+                break
+            }
+        }
+
+
+
 
 //       6개의 당첨번호 / 각 자리의 텍스트뷰를 매칭하는 for문
 
