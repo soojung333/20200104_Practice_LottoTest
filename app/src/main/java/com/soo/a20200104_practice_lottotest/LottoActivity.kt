@@ -2,8 +2,10 @@ package com.soo.a20200104_practice_lottotest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_lotto.*
 import org.w3c.dom.Text
 import java.util.*
@@ -22,6 +24,8 @@ class LottoActivity : BaseActivity() {
     val myLottoNumTextViewList = ArrayList<TextView>()
     var bonusNumber = 0
 
+    val mHandler = Handler()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lotto)
@@ -39,7 +43,33 @@ class LottoActivity : BaseActivity() {
 
 //            몇등인지 판단하기
             checkLottoRank()
+        }
 
+        buyAutoLottoBtn.setOnClickListener {
+            buyLottoLoop()
+
+        }
+
+    }
+
+    fun buyLottoLoop() {
+        mHandler.post(buyingLottoRunnable)
+
+    }
+
+    val buyingLottoRunnable = object :Runnable {
+        override fun run() {
+
+            if (usedMoney < 10000000) {
+                makeWinLottoNum()
+                checkLottoRank()
+                buyLottoLoop()
+            }
+            else {
+                runOnUiThread {
+                    Toast.makeText(mContext, "로또 구매를 종료합니다", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
     }
