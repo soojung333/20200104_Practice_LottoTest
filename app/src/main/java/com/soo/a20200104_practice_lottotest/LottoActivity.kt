@@ -154,7 +154,8 @@ class LottoActivity : BaseActivity() {
             fourthRankCount++
         }
         else if (correctCount == 3) {
-            totalWinMoney += 5000
+
+            usedMoney -= 5000
             fifthRankCount++
         }
         else {
@@ -172,7 +173,7 @@ class LottoActivity : BaseActivity() {
         thirdRankCountTxt.text = "${thirdRankCount} 회"
         fourthRankCountTxt.text = "${fourthRankCount} 회"
         fifthRankCountTxt.text = "${fifthRankCount} 회"
-        noRankCountTxt.text = "${noRankCount} 회"
+        noRankCountTxt.text = "${noRankCount} "
 
     }
 
