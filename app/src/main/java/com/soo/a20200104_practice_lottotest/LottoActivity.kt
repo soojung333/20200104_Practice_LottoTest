@@ -79,7 +79,24 @@ class LottoActivity : BaseActivity() {
             totalWinMoney += 50000000000
         }
         else if (correctCount == 5) {
-            totalWinMoney += 1500000
+
+            var isSecondRank = false
+
+            for (myNumTxt in myLottoNumTextViewList) {
+//                텍스트뷰에 적힌 글씨를 숫자로 변환
+                val myNumber = myNumTxt.text.toString().toInt()
+
+                if (myNumber == bonusNumber) {
+                    isSecondRank = true
+                }
+            }
+
+            if (isSecondRank) {
+                totalWinMoney += 50000000
+            }
+            else {
+                totalWinMoney += 1500000
+            }
         }
         else if (correctCount == 4) {
             totalWinMoney += 50000
