@@ -27,6 +27,13 @@ class LottoActivity : BaseActivity() {
     val mHandler = Handler()
     var isNowBuyingLotto = false
 
+    var firstRankCount = 0
+    var secondRankCount = 0
+    var thirdRankCount = 0
+    var fourthRankCount = 0
+    var fifthRankCount = 0
+    var noRankCount = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lotto)
@@ -57,7 +64,7 @@ class LottoActivity : BaseActivity() {
                 mHandler.removeCallbacks(buyingLottoRunnable)
                 isNowBuyingLotto = false
                 buyAutoLottoBtn.text = "자동구매 재개"
-            }
+           }
 
         }
 
@@ -118,6 +125,7 @@ class LottoActivity : BaseActivity() {
 
         if (correctCount == 6) {
             totalWinMoney += 50000000000
+            firstRankCount ++
         }
         else if (correctCount == 5) {
 
@@ -134,18 +142,23 @@ class LottoActivity : BaseActivity() {
 
             if (isSecondRank) {
                 totalWinMoney += 50000000
+                secondRankCount ++
             }
             else {
                 totalWinMoney += 1500000
+                thirdRankCount++
             }
         }
         else if (correctCount == 4) {
             totalWinMoney += 50000
+            fourthRankCount++
         }
         else if (correctCount == 3) {
             totalWinMoney += 5000
+            fifthRankCount++
         }
         else {
+            noRankCount++
         }
 
         totalWinMoneyTxt.text = String.format("%,d 원", totalWinMoney)
@@ -153,6 +166,13 @@ class LottoActivity : BaseActivity() {
 //        사용금액 : 한 장 살때마다 천원씩 증가.
         usedMoney += 1000
         usedMoneyTxt.text = String.format("%,d 원", usedMoney)
+
+        firstRankCountTxt.text = "${firstRankCount} 회"
+        secondRankCountTxt.text = "${secondRankCount} 회"
+        thirdRankCountTxt.text = "${thirdRankCount} 회"
+        fourthRankCountTxt.text = "${fourthRankCount} 회"
+        fifthRankCountTxt.text = "${fifthRankCount} 회"
+        noRankCountTxt.text = "${noRankCount} 회"
 
     }
 
